@@ -16,7 +16,17 @@ const BOTTOM_MARGIN = 16;
 const LABEL_WIDTH = 198;
 const LABEL_HEIGHT = 72;
 
+// Number of labels to skip before printing. Useful when you have a partially-used sheet.
+let skip = 0;
 const contacts = [];
+
+for (let i = 0; i < process.argv.length; i++) {
+  if (process.argv[i] === '--skip') {
+    skip = parseInt(process.argv[i + 1]);
+    break;
+  }
+}
+
 fs.createReadStream('contacts.csv')
   .pipe(csv())
   .on('data', (data) => contacts.push(data))
@@ -31,23 +41,20 @@ function printAddresses(contacts) {
   doc.pipe(fs.createWriteStream('labels.pdf'));
   doc.font('PTSerif.ttc', 'PTSerif-Regular');
   doc.fontSize(9);
-  let i = 0;
-  let y = TOP_MARGIN
+  let i = skip;
 
   for (const contact of contacts) {
     let firstLine = getFirstLine(contact);
     let address = getAddress(contact);
     const x = LEFT_MARGIN + LABEL_WIDTH * (i % ACROSS);
+    const y = TOP_MARGIN + Math.floor(i / ACROSS) * LABEL_HEIGHT;
     doc.text(firstLine, x, y);
     doc.text(address);
 
     i++;
-    if (i % ACROSS === 0) {
-      y += LABEL_HEIGHT;
-    }
     if (i % (ACROSS * DOWN) === 0) {
       doc.addPage();
-      y = TOP_MARGIN;
+      i = 0;
     }
   }
   doc.end();
