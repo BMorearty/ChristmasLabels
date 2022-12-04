@@ -1,29 +1,5 @@
 'use strict';
 
-/**
- * Instructions:
- *
- * 1. In Google Contacts go to the Christmas List label.
- * 2. Select a single contact.
- * 3. Click the More button.
- * 4. Click Export.
- * 5. Select Christmas List.
- * 6. Select Google CSV.
- * 7. Click Export.
- * 8. Move the file to the root directory of this project.
- * 9. Run `node christmaslabels.mjs`.
- * 10. Open labels.pdf.
- *
- * Adding people to the Christmas list:
- * 1. In Google Contacts, open the contact you want to add.
- * 2. Add the Christmas List label to the contact.
- * 3. Edit the contact.
- * 4. Add a custom field with type 'Christmas'. The value is the first line of the label.
- *    E.g., "The Smith Family"
- * 5. If the contact has multiple addresses, add type 'Mail' or 'Home' to the one you want to use.
- *    Mail takes precedence over Home.
- */
-
 import csv from 'csv-parser';
 import fs from 'fs';
 import process from 'process';
