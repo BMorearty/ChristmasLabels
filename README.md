@@ -2,6 +2,8 @@
 
 This little program generates a PDF with labels for Christmas letters.
 
+![Rudolph](Rudolph.png)
+
 # Installation
 
 1. First you need NodeJS.
