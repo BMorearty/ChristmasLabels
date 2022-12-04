@@ -20,13 +20,15 @@ This little program generates a PDF with labels for Christmas letters.
 6. Select Google CSV.
 7. Click Export.
 8. Move the file to the root directory of this project.
-9. Run `node christmaslabels.mjs`.
+9. Run `node src/christmaslabels.mjs`.
 10. Open labels.pdf and print it.
 
-## Options
+## Command line options
 
 `--skip n`
 : Still prints all labels but on page 1 it doesn’t print in the first `n` label positions (left-to-right, top-to-bottom). Useful for when you have a left over sheet of labels from a previous printing.
+
+    node src/christmaslabels.mjs --skip 12
 
 # Adding people to the Christmas list:
 1. In Google Contacts, open the contact you want to add.
