@@ -17,7 +17,7 @@ This little program generates a PDF with labels for Christmas letters.
 3. Select Google CSV.
 4. Click Export.
 5. Move the file to the root directory of this project.
-6. Run `node src/christmaslabels.mjs`.
+6. Run `node src/christmaslabels.mjs`
 7. Open labels.pdf and print it.
 
 ## Command line options
