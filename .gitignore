@@ -1,3 +1,4 @@
 node_modules/
 contacts.csv
+contacts-*.csv
 labels.pdf
