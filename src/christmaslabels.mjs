@@ -64,13 +64,13 @@ function printAddresses(contacts) {
 // which is the custom field whose type is "Christmas".
 function getFirstLine(contact) {
   for (let key of Object.keys(contact)) {
-    const match = /Custom Field (\d+) - Type/.exec(key);
+    const match = /Custom Field (\d+) - Label/.exec(key);
     if (match && contact[key] === 'Christmas') {
       const fieldNum = match[1]
       return contact[`Custom Field ${fieldNum} - Value`];
     }
   }
-  console.log("No first line found for", contact.Name);
+  console.log("No first line found for", contact['First Name'], contact['Last Name']);
   process.exit(1);
 }
 
@@ -82,7 +82,7 @@ function getFirstLine(contact) {
 function getAddress(contact) {
   let addrTypes = [];
   for (let key of Object.keys(contact)) {
-    const match = /Address (\d+) - Type/.exec(key);
+    const match = /Address (\d+) - Label/.exec(key);
     if (match) {
       addrTypes.push({addrNum: match[1], type: contact[key]});
     }
@@ -110,8 +110,12 @@ function getAddress(contact) {
   if (nonBlankAddrNums.length === 1) {
     return addressNumber(contact, nonBlankAddrNums[0]);
   }
+  if (nonBlankAddrNums.length === 0) {
+    console.log(`No address found for ${contact['First Name'] + ' ' + contact['Last Name']}.`);
+    process.exit(1);
+  }
 
-  console.log(`Multiple non-blank addresses found for ${contact.Name}. Mark one with type 'Mail'.`);
+  console.log(`Multiple non-blank addresses found for ${contact['First Name'] + ' ' + contact['Last Name']}. Mark one with type 'Mail'.`);
   process.exit(1);
 }
 
