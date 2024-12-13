@@ -120,5 +120,10 @@ function getAddress(contact) {
 }
 
 function addressNumber(contact, n) {
-  return contact[`Address ${n} - Formatted`].replace(/\nUS$/, '');
+  const address = contact[`Address ${n} - Formatted`].replace(/\nUS$/, '');
+  if (address.includes(' ::: ')) {
+    console.error(`There are multiple addresses with the same label for ${contact['First Name'] + ' ' + contact['Last Name']}.`)
+    process.exit(1);
+  }
+  return address;
 }
